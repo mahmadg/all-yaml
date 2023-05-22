@@ -1,0 +1,13 @@
+---
+- name: Copying key to managed nodes
+  hosts: vm131
+  tasks:
+    - name: Copying key to managed nodes
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+
+...
+
+

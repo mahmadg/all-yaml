@@ -1,0 +1,13 @@
+---
+- name: Adding file
+  hosts: ALL
+  tasks:
+    - name: making file
+      file:
+        path: /tmp/test
+        state: touch
+
+    - name: Inserting data into file
+      lineinfile:
+        path: /etc/hosts
+        line: 192.168.1.163 vm163

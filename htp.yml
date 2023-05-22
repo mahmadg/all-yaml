@@ -1,0 +1,22 @@
+---
+- name: Installing httpd
+  hosts: localhost
+  tasks:
+    - name: htp
+      yum:
+        name: httpd
+        state: latest
+
+    - name: starting service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+
+    - name: Adding rules in the firewalld
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes

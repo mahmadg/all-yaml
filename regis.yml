@@ -1,0 +1,9 @@
+---
+- name: my playbook
+  hosts: ALL
+  tasks:
+    - name: debiging
+      command: uptime
+      register: uptim
+
+    - debug: var=uptim.stderr

@@ -1,0 +1,14 @@
+---
+- name: practice
+  hosts: IT
+  vars:
+    usr:
+      - anosh1
+      - anosh2
+      - anosh3
+  tasks:
+    - name: adding users
+      user:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ usr }}"

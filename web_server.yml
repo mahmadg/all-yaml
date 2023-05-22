@@ -1,0 +1,41 @@
+---
+- name: web server
+  hosts: all
+  tasks:
+    - name: Installing httpd
+      yum:
+        name: httpd
+        state: installed
+
+
+    - name: Starting and enabling the service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+
+    - name: Adding service in firewall
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+
+    - name: Changing selinux
+      selinux:
+        policy: targeted
+        state: permissive
+        
+
+
+    - name: DISABLING SELINUX
+      selinux:
+        state: disabled
+
+    - name: copying file
+      copy:
+        src: /root/index.html
+        dest: /var/www/html/index.html
+

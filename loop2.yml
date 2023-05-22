@@ -1,0 +1,15 @@
+---
+- name: practice loop 1st way
+  hosts: IT
+  vars:
+    usrs:
+      - ammar1
+      - ammar2
+      - ammar3
+  tasks:
+    - name: adding users
+      user:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ usrs }}"
+

@@ -1,0 +1,14 @@
+---
+- name: Creating user
+  hosts: ALL
+  tasks:
+    - name: Adding user
+      user:
+        name: GF
+        state: present
+        password: "$1$9dWLVeYe$cmjTrPAZuWVSiFoPdCGa6."
+
+
+    - name: expiring password
+      shell:
+        cmd: chage -d 0 GF

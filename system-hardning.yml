@@ -1,0 +1,9 @@
+---
+- name: System hardning 
+  hosts: ALL
+  tasks:
+    - name: Updating the system
+      yum:
+        name: ' * '
+        state: latest
+    

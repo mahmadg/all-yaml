@@ -1,0 +1,16 @@
+---
+- name: loop practice
+  hosts: IT
+  vars:
+    users:
+      - ammar1
+      - ammar2
+      - ammar3
+      - ammar4
+      - ammar5
+  tasks:
+    - name: Adding users
+      user:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ users }}"

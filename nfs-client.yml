@@ -1,0 +1,39 @@
+---
+- name: nfs-server
+  hosts: 192.168.1.136
+  tasks:
+    - name: Adding entry
+      lineinfile:
+        path: /etc/exports
+        line: /nfs-share {{ ansible_default_ipv4.network }}/{{ ansible_default_ipv4.netmask }}(rw,no_root_squash)
+      tags: tag1
+
+    - name: Exporting
+      shell:
+        cmd: exportfs -avr
+
+
+
+
+- name: nfs-client
+  hosts: vm137
+  tasks:
+    - name: Installing nfs package
+      yum:
+        name: nfs-utils
+        state: installed
+
+
+    - name: making directory
+      file:
+        path: /nfs-share
+        state: directory
+
+    - name: mounting
+      mount:
+        path: /nfs-share
+        src: 192.168.1.136:/nfs-share
+        state: mounted
+        fstype: nfs
+
+

@@ -1,0 +1,16 @@
+---
+- name: looop3
+  hosts: IT
+  vars_files: /root/vars.file.yml
+  tasks:
+    - name: creating users
+      user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ usrs }}"
+
+    - name: installing packages
+      yum:
+        name: "{{ item }}"
+        state: installed
+      loop: "{{ pkg }}"

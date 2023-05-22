@@ -1,0 +1,14 @@
+---
+- name: Using dictionary
+  hosts: IT
+  vars:
+    users:
+      - { name: "ali", state: "present" }
+      - { name: "ali1", state: "present" }
+      - { name: "ali2", state: "present" }
+  tasks:
+    - name: Adding user
+      user:
+        name: "{{ item.name }}"
+        state: "{{ item.state }}"
+      loop: "{{ users }}"

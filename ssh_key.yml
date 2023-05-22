@@ -1,0 +1,30 @@
+---
+- name: CREATING SSH KEY
+  hosts: localhost
+  tasks:
+    - name: CREATING DIR.SSH
+      file:
+        path: /root/.ssh
+        state: directory
+
+
+    - name: Generating key
+      openssh_keypair:
+        path: /root/.ssh/id_rsa
+
+
+#- name: Copying key to managed nodes
+#  hosts: IT
+#  tasks:
+
+
+#    - name: Copying key to managed nodes
+#      authorized_key: 
+#        user: root 
+#        state: present
+#        key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+
+
+
+...
+    

@@ -1,0 +1,49 @@
+---
+- name: NFS-Server
+  hosts: localhost
+  tasks:
+    - name: Installing the services
+      yum:
+        name: "{{ item }}"
+        state: installed
+      loop:
+        - nfs-utils
+        - rpcbind
+
+    - name: Starting and enabling the services
+      service:
+        name: nfs
+        state: started
+        enabled: yes
+
+    - name: Starting and enabling
+      service:
+        name: rpcbind
+        state: started
+        enabled: yes
+     
+
+    - name: Adding the services in the firewall
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        permanent: yes
+        immediate: yes
+      loop:
+        - nfs
+        - rpc-bind
+        - mountd
+
+    - name: Making directory
+      file:
+        path: /nfs-share
+        state: directory
+
+    - name: Adding entry in /etc/exports
+      lineinfile:
+        path: /etc/exports
+        line: /nfs-share 192.168.1.163(rw,no_root_squash)
+
+    - name: Exporting the share
+      shell:
+        cmd: exportfs -avr

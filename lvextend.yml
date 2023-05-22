@@ -1,0 +1,8 @@
+---
+- name: EXTEND THE VOLUME
+  hosts: vm140
+  tasks:
+    - name:
+      lvg:
+        vg: centos
+        pvs: /dev/sdb
