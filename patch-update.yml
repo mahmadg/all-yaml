@@ -1,9 +1,9 @@
 ---
 - name: For updating the system
-  hosts: ALL
+  hosts: all
   tasks:
     - name: Update the server including kernel 
       yum:
-        name: ' * '
+        name: ' kernel '
         state: latest
-      when:  ansible_kernel == "3.10.0-1160.el7.x86_64"
+      when:  ansible_kernel == "4.18.0-513.5.1.el8_9.x86_64"
